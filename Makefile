@@ -2,6 +2,11 @@
 #CUSTOM_CLANG=/tools/clang370/bin/clang
 LOCAL_CLANG=clang+llvm-3.7.0-x86_64-apple-darwin/bin/clang
 CUSTOM_CLANG=`pwd`/$(LOCAL_CLANG)
+# newer xcode location
+CUSTOM_XCODE_INCLUDE=-I/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include
+# hack: requires cd .. ; mkdir gl_inc ; cd gl_inc ; mkdir OpenGL ; sudo ln -s /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/OpenGL.framework/Versions/A/Headers/* OpenGL/
+CUSTOM_GL_INCLUDE=-I../gl_inc/
+
 ifeq (, $(shell which brew))
 # Running on Windows, let's not care.
 else
@@ -95,8 +100,8 @@ $(LOCAL_CLANG):
 
 #compile Urho.pch for SharpieBinder on Mac
 PchMac: $(LOCAL_CLANG)
-	if test ! -e /usr/include; then xcode-select --install; fi
-	make -j1 Urho3D_Mac -f MakeMac && $(CUSTOM_CLANG) -cc1 -stdlib=libc++ -std=c++0x -emit-pch -DURHO3D_OPENGL -DURHO3D_CXX11=1 -o Bindings/Urho.pch Bindings/Native/all-urho.cpp  -IUrho3D/Urho3D_Mac/include -IUrho3D/Urho3D_Mac/include/Urho3D/ThirdParty
+	# no longer valid: if test ! -e /usr/include; then xcode-select --install; fi
+	make -j1 Urho3D_Mac -f MakeMac && $(CUSTOM_CLANG) -cc1 -stdlib=libc++ -std=c++0x -emit-pch -DURHO3D_OPENGL -DURHO3D_CXX11=1 -o Bindings/Urho.pch Bindings/Native/all-urho.cpp  -IUrho3D/Urho3D_Mac/include -IUrho3D/Urho3D_Mac/include/Urho3D/ThirdParty $(CUSTOM_XCODE_INCLUDE) $(CUSTOM_GL_INCLUDE)
 
 SharpieBinder: Bindings/Urho.pch
 	cd SharpieBinder && $(NUGET) restore SharpieBinder.sln && $(XBUILD) SharpieBinder.csproj && cd bin && $(MONO64) SharpieBinder.exe
