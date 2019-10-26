@@ -1,6 +1,7 @@
 [submodule "Urho3D/Source"]
 	path = Urho3D/Source
-	url = git@github.com:xamarin/Urho3D.git
+	url = https://github.com/sweep3r/xUrho3D.git
+	branch = sdl204
 [submodule "Samples"]
 	path = Samples
-	url = git@github.com:xamarin/urho-samples.git
+	url = https://github.com/sweep3r/urho-samples.git
