@@ -138,7 +138,11 @@ sub mapType {
 
 sub stringHash {
     my ($str) = @_;
-	$str = lc $str;
+	
+	# Do not lowercase the key, as the U3D key is no longer lowercased. 
+	# This hash needs to match the hash for the Urho events, eg. E_UPDATE.
+	# $str = lc $str;
+	
 	$hash = 0;
 	foreach $char (split //, $str) {
 		$hash = ord($char) + ($hash << 6) + ($hash << 16) - $hash;
