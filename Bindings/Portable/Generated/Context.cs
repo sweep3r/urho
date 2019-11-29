@@ -74,15 +74,15 @@ namespace Urho
 		}
 
 		[DllImport (Consts.NativeImport, CallingConvention = CallingConvention.Cdecl)]
-		internal static extern void Context_RegisterSubsystem (IntPtr handle, IntPtr subsystem);
+		internal static extern void Context_RegisterSubsystem (IntPtr handle, IntPtr @object);
 
 		/// <summary>
 		/// Register a subsystem.
 		/// </summary>
-		public void RegisterSubsystem (Urho.UrhoObject subsystem)
+		public void RegisterSubsystem (Urho.UrhoObject @object)
 		{
 			Runtime.ValidateRefCounted (this);
-			Context_RegisterSubsystem (handle, (object)subsystem == null ? IntPtr.Zero : subsystem.Handle);
+			Context_RegisterSubsystem (handle, (object)@object == null ? IntPtr.Zero : @object.Handle);
 		}
 
 		[DllImport (Consts.NativeImport, CallingConvention = CallingConvention.Cdecl)]

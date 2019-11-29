@@ -175,15 +175,15 @@ namespace Urho
 		}
 
 		[DllImport (Consts.NativeImport, CallingConvention = CallingConvention.Cdecl)]
-		internal static extern void AnimationController_StopAll (IntPtr handle, float fadeTime);
+		internal static extern void AnimationController_StopAll (IntPtr handle, float fadeOutTime);
 
 		/// <summary>
 		/// Stop all animations. Zero fadetime is instant.
 		/// </summary>
-		public void StopAll (float fadeTime = 0f)
+		public void StopAll (float fadeOutTime = 0f)
 		{
 			Runtime.ValidateRefCounted (this);
-			AnimationController_StopAll (handle, fadeTime);
+			AnimationController_StopAll (handle, fadeOutTime);
 		}
 
 		[DllImport (Consts.NativeImport, CallingConvention = CallingConvention.Cdecl)]

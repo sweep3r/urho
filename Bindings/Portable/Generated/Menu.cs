@@ -103,15 +103,15 @@ namespace Urho.Gui
 		}
 
 		[DllImport (Consts.NativeImport, CallingConvention = CallingConvention.Cdecl)]
-		internal static extern bool Menu_LoadXML (IntPtr handle, IntPtr source, IntPtr styleFile, bool setInstanceDefault);
+		internal static extern bool Menu_LoadXML (IntPtr handle, IntPtr source, IntPtr styleFile);
 
 		/// <summary>
 		/// Load from XML data with style. Return true if successful.
 		/// </summary>
-		public override bool LoadXml (XmlElement source, Urho.Resources.XmlFile styleFile, bool setInstanceDefault = false)
+		public override bool LoadXml (XmlElement source, Urho.Resources.XmlFile styleFile)
 		{
 			Runtime.ValidateRefCounted (this);
-			return Menu_LoadXML (handle, (object)source == null ? IntPtr.Zero : source.Handle, (object)styleFile == null ? IntPtr.Zero : styleFile.Handle, setInstanceDefault);
+			return Menu_LoadXML (handle, (object)source == null ? IntPtr.Zero : source.Handle, (object)styleFile == null ? IntPtr.Zero : styleFile.Handle);
 		}
 
 		[DllImport (Consts.NativeImport, CallingConvention = CallingConvention.Cdecl)]
@@ -175,15 +175,15 @@ namespace Urho.Gui
 		}
 
 		[DllImport (Consts.NativeImport, CallingConvention = CallingConvention.Cdecl)]
-		internal static extern void Menu_SetPopup (IntPtr handle, IntPtr element);
+		internal static extern void Menu_SetPopup (IntPtr handle, IntPtr popup);
 
 		/// <summary>
 		/// Set popup element to show on selection.
 		/// </summary>
-		private void SetPopup (UIElement element)
+		private void SetPopup (UIElement popup)
 		{
 			Runtime.ValidateRefCounted (this);
-			Menu_SetPopup (handle, (object)element == null ? IntPtr.Zero : element.Handle);
+			Menu_SetPopup (handle, (object)popup == null ? IntPtr.Zero : popup.Handle);
 		}
 
 		[DllImport (Consts.NativeImport, CallingConvention = CallingConvention.Cdecl)]

@@ -151,15 +151,15 @@ namespace Urho
 		}
 
 		[DllImport (Consts.NativeImport, CallingConvention = CallingConvention.Cdecl)]
-		internal static extern void Viewport_SetRenderPath (IntPtr handle, IntPtr path);
+		internal static extern void Viewport_SetRenderPath (IntPtr handle, IntPtr renderPath);
 
 		/// <summary>
 		/// Set rendering path.
 		/// </summary>
-		private void SetRenderPath (RenderPath path)
+		private void SetRenderPath (RenderPath renderPath)
 		{
 			Runtime.ValidateRefCounted (this);
-			Viewport_SetRenderPath (handle, (object)path == null ? IntPtr.Zero : path.Handle);
+			Viewport_SetRenderPath (handle, (object)renderPath == null ? IntPtr.Zero : renderPath.Handle);
 		}
 
 		[DllImport (Consts.NativeImport, CallingConvention = CallingConvention.Cdecl)]

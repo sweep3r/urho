@@ -21,8 +21,9 @@ namespace Urho
 		{
 #if NET45
 			return RunAsync(new ApplicationOptions(assetsFolder: "Data") { Width = width, Height = height, ResizableWindow = true });
-#endif
+#else
 			return RunAsync(new ApplicationOptions(assetsFolder: null));
+#endif
 		}
 
 		[Obsolete("RunAsync is Obsolete. Use Show() instead.")]

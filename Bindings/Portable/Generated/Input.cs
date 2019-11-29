@@ -410,31 +410,31 @@ namespace Urho
 		}
 
 		[DllImport (Consts.NativeImport, CallingConvention = CallingConvention.Cdecl)]
-		internal static extern int Input_GetKeyFromName (IntPtr handle, string name);
+		internal static extern Key Input_GetKeyFromName (IntPtr handle, string name);
 
 		/// <summary>
 		/// Return keycode from key name.
 		/// </summary>
-		public int GetKeyFromName (string name)
+		public Key GetKeyFromName (string name)
 		{
 			Runtime.ValidateRefCounted (this);
 			return Input_GetKeyFromName (handle, name);
 		}
 
 		[DllImport (Consts.NativeImport, CallingConvention = CallingConvention.Cdecl)]
-		internal static extern int Input_GetKeyFromScancode (IntPtr handle, int scancode);
+		internal static extern Key Input_GetKeyFromScancode (IntPtr handle, Scancode scancode);
 
 		/// <summary>
 		/// Return keycode from scancode.
 		/// </summary>
-		public int GetKeyFromScancode (int scancode)
+		public Key GetKeyFromScancode (Scancode scancode)
 		{
 			Runtime.ValidateRefCounted (this);
 			return Input_GetKeyFromScancode (handle, scancode);
 		}
 
 		[DllImport (Consts.NativeImport, CallingConvention = CallingConvention.Cdecl)]
-		internal static extern IntPtr Input_GetKeyName (IntPtr handle, int key);
+		internal static extern IntPtr Input_GetKeyName (IntPtr handle, Key key);
 
 		/// <summary>
 		/// Return name of key from keycode.
@@ -442,47 +442,47 @@ namespace Urho
 		public string GetKeyName (Key key)
 		{
 			Runtime.ValidateRefCounted (this);
-			return Marshal.PtrToStringAnsi (Input_GetKeyName (handle, (int)key));
+			return Marshal.PtrToStringAnsi (Input_GetKeyName (handle, key));
 		}
 
 		[DllImport (Consts.NativeImport, CallingConvention = CallingConvention.Cdecl)]
-		internal static extern int Input_GetScancodeFromKey (IntPtr handle, int key);
+		internal static extern Scancode Input_GetScancodeFromKey (IntPtr handle, Key key);
 
 		/// <summary>
 		/// Return scancode from keycode.
 		/// </summary>
-		public int GetScancodeFromKey (Key key)
+		public Scancode GetScancodeFromKey (Key key)
 		{
 			Runtime.ValidateRefCounted (this);
-			return Input_GetScancodeFromKey (handle, (int)key);
+			return Input_GetScancodeFromKey (handle, key);
 		}
 
 		[DllImport (Consts.NativeImport, CallingConvention = CallingConvention.Cdecl)]
-		internal static extern int Input_GetScancodeFromName (IntPtr handle, string name);
+		internal static extern Scancode Input_GetScancodeFromName (IntPtr handle, string name);
 
 		/// <summary>
 		/// Return scancode from key name.
 		/// </summary>
-		public int GetScancodeFromName (string name)
+		public Scancode GetScancodeFromName (string name)
 		{
 			Runtime.ValidateRefCounted (this);
 			return Input_GetScancodeFromName (handle, name);
 		}
 
 		[DllImport (Consts.NativeImport, CallingConvention = CallingConvention.Cdecl)]
-		internal static extern IntPtr Input_GetScancodeName (IntPtr handle, int scancode);
+		internal static extern IntPtr Input_GetScancodeName (IntPtr handle, Scancode scancode);
 
 		/// <summary>
 		/// Return name of key from scancode.
 		/// </summary>
-		public string GetScancodeName (int scancode)
+		public string GetScancodeName (Scancode scancode)
 		{
 			Runtime.ValidateRefCounted (this);
 			return Marshal.PtrToStringAnsi (Input_GetScancodeName (handle, scancode));
 		}
 
 		[DllImport (Consts.NativeImport, CallingConvention = CallingConvention.Cdecl)]
-		internal static extern bool Input_GetKeyDown (IntPtr handle, int key);
+		internal static extern bool Input_GetKeyDown (IntPtr handle, Key key);
 
 		/// <summary>
 		/// Check if a key is held down.
@@ -490,11 +490,11 @@ namespace Urho
 		public bool GetKeyDown (Key key)
 		{
 			Runtime.ValidateRefCounted (this);
-			return Input_GetKeyDown (handle, (int)key);
+			return Input_GetKeyDown (handle, key);
 		}
 
 		[DllImport (Consts.NativeImport, CallingConvention = CallingConvention.Cdecl)]
-		internal static extern bool Input_GetKeyPress (IntPtr handle, int key);
+		internal static extern bool Input_GetKeyPress (IntPtr handle, Key key);
 
 		/// <summary>
 		/// Check if a key has been pressed on this frame.
@@ -502,91 +502,79 @@ namespace Urho
 		public bool GetKeyPress (Key key)
 		{
 			Runtime.ValidateRefCounted (this);
-			return Input_GetKeyPress (handle, (int)key);
+			return Input_GetKeyPress (handle, key);
 		}
 
 		[DllImport (Consts.NativeImport, CallingConvention = CallingConvention.Cdecl)]
-		internal static extern bool Input_GetScancodeDown (IntPtr handle, int scancode);
+		internal static extern bool Input_GetScancodeDown (IntPtr handle, Scancode scancode);
 
 		/// <summary>
 		/// Check if a key is held down by scancode.
 		/// </summary>
-		public bool GetScancodeDown (int scancode)
+		public bool GetScancodeDown (Scancode scancode)
 		{
 			Runtime.ValidateRefCounted (this);
 			return Input_GetScancodeDown (handle, scancode);
 		}
 
 		[DllImport (Consts.NativeImport, CallingConvention = CallingConvention.Cdecl)]
-		internal static extern bool Input_GetScancodePress (IntPtr handle, int scancode);
+		internal static extern bool Input_GetScancodePress (IntPtr handle, Scancode scancode);
 
 		/// <summary>
 		/// Check if a key has been pressed on this frame by scancode.
 		/// </summary>
-		public bool GetScancodePress (int scancode)
+		public bool GetScancodePress (Scancode scancode)
 		{
 			Runtime.ValidateRefCounted (this);
 			return Input_GetScancodePress (handle, scancode);
 		}
 
 		[DllImport (Consts.NativeImport, CallingConvention = CallingConvention.Cdecl)]
-		internal static extern bool Input_GetMouseButtonDown (IntPtr handle, int button);
+		internal static extern bool Input_GetQualifierDown (IntPtr handle, Qualifier qualifier);
+
+		[DllImport(Consts.NativeImport, CallingConvention = CallingConvention.Cdecl)]
+		internal static extern bool Input_GetMouseButtonDown(IntPtr handle, int button);
 
 		/// <summary>
 		/// Check if a mouse button is held down.
 		/// </summary>
-		public bool GetMouseButtonDown (MouseButton button)
+		public bool GetMouseButtonDown(MouseButton button)
 		{
-			Runtime.ValidateRefCounted (this);
-			return Input_GetMouseButtonDown (handle, (int)button);
+			Runtime.ValidateRefCounted(this);
+			return Input_GetMouseButtonDown(handle, (int)button);
 		}
 
-		[DllImport (Consts.NativeImport, CallingConvention = CallingConvention.Cdecl)]
-		internal static extern bool Input_GetMouseButtonPress (IntPtr handle, int button);
+		[DllImport(Consts.NativeImport, CallingConvention = CallingConvention.Cdecl)]
+		internal static extern bool Input_GetMouseButtonPress(IntPtr handle, int button);
 
 		/// <summary>
 		/// Check if a mouse button has been pressed on this frame.
 		/// </summary>
-		public bool GetMouseButtonPress (MouseButton button)
+		public bool GetMouseButtonPress(MouseButton button)
 		{
-			Runtime.ValidateRefCounted (this);
-			return Input_GetMouseButtonPress (handle, (int)button);
+			Runtime.ValidateRefCounted(this);
+			return Input_GetMouseButtonPress(handle, (int)button);
 		}
-
-		[DllImport (Consts.NativeImport, CallingConvention = CallingConvention.Cdecl)]
-		internal static extern bool Input_GetQualifierDown (IntPtr handle, int qualifier);
-
+		
 		/// <summary>
-		/// Check if a qualifier key is held down.
-		/// </summary>
-		public bool GetQualifierDown (int qualifier)
+				/// Check if a qualifier key is held down.
+				/// </summary>
+		public bool GetQualifierDown (Qualifier qualifier)
 		{
 			Runtime.ValidateRefCounted (this);
 			return Input_GetQualifierDown (handle, qualifier);
 		}
 
 		[DllImport (Consts.NativeImport, CallingConvention = CallingConvention.Cdecl)]
-		internal static extern bool Input_GetQualifierPress (IntPtr handle, int qualifier);
+		internal static extern bool Input_GetQualifierPress (IntPtr handle, Qualifier qualifier);
 
 		/// <summary>
 		/// Check if a qualifier key has been pressed on this frame.
 		/// </summary>
-		public bool GetQualifierPress (int qualifier)
+		public bool GetQualifierPress (Qualifier qualifier)
 		{
 			Runtime.ValidateRefCounted (this);
 			return Input_GetQualifierPress (handle, qualifier);
-		}
-
-		[DllImport (Consts.NativeImport, CallingConvention = CallingConvention.Cdecl)]
-		internal static extern int Input_GetQualifiers (IntPtr handle);
-
-		/// <summary>
-		/// Return the currently held down qualifiers.
-		/// </summary>
-		private int GetQualifiers ()
-		{
-			Runtime.ValidateRefCounted (this);
-			return Input_GetQualifiers (handle);
 		}
 
 		[DllImport (Consts.NativeImport, CallingConvention = CallingConvention.Cdecl)]
@@ -964,15 +952,6 @@ namespace Urho
 		public Urho.IntVector2 MousePosition {
 			get {
 				return GetMousePosition ();
-			}
-		}
-
-		/// <summary>
-		/// Return the currently held down qualifiers.
-		/// </summary>
-		public int Qualifiers {
-			get {
-				return GetQualifiers ();
 			}
 		}
 

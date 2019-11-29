@@ -62,15 +62,15 @@ namespace Urho
 		}
 
 		[DllImport (Consts.NativeImport, CallingConvention = CallingConvention.Cdecl)]
-		internal static extern void AnimationState_SetStartBone (IntPtr handle, Bone* bone);
+		internal static extern void AnimationState_SetStartBone (IntPtr handle, Bone* startBone);
 
 		/// <summary>
 		/// Set start bone. Not supported in node animation mode. Resets any assigned per-bone weights.
 		/// </summary>
-		private void SetStartBone (Bone* bone)
+		private void SetStartBone (Bone* startBone)
 		{
 			Runtime.ValidateRefCounted (this);
-			AnimationState_SetStartBone (handle, bone);
+			AnimationState_SetStartBone (handle, startBone);
 		}
 
 		[DllImport (Consts.NativeImport, CallingConvention = CallingConvention.Cdecl)]

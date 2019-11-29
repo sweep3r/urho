@@ -127,30 +127,6 @@ namespace Urho.Gui
 		}
 
 		[DllImport (Consts.NativeImport, CallingConvention = CallingConvention.Cdecl)]
-		internal static extern void ScrollView_OnWheel (IntPtr handle, int delta, int buttons, int qualifiers);
-
-		/// <summary>
-		/// React to mouse wheel.
-		/// </summary>
-		public override void OnWheel (int delta, int buttons, int qualifiers)
-		{
-			Runtime.ValidateRefCounted (this);
-			ScrollView_OnWheel (handle, delta, buttons, qualifiers);
-		}
-
-		[DllImport (Consts.NativeImport, CallingConvention = CallingConvention.Cdecl)]
-		internal static extern void ScrollView_OnKey (IntPtr handle, int key, int buttons, int qualifiers);
-
-		/// <summary>
-		/// React to a key press.
-		/// </summary>
-		public override void OnKey (int key, int buttons, int qualifiers)
-		{
-			Runtime.ValidateRefCounted (this);
-			ScrollView_OnKey (handle, key, buttons, qualifiers);
-		}
-
-		[DllImport (Consts.NativeImport, CallingConvention = CallingConvention.Cdecl)]
 		internal static extern void ScrollView_OnResize (IntPtr handle, ref Urho.IntVector2 newSize, ref Urho.IntVector2 delta);
 
 		/// <summary>

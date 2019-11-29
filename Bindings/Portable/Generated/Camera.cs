@@ -247,18 +247,6 @@ namespace Urho
 		}
 
 		[DllImport (Consts.NativeImport, CallingConvention = CallingConvention.Cdecl)]
-		internal static extern void Camera_SetViewOverrideFlags (IntPtr handle, uint flags);
-
-		/// <summary>
-		/// Set view override flags.
-		/// </summary>
-		private void SetViewOverrideFlags (uint flags)
-		{
-			Runtime.ValidateRefCounted (this);
-			Camera_SetViewOverrideFlags (handle, flags);
-		}
-
-		[DllImport (Consts.NativeImport, CallingConvention = CallingConvention.Cdecl)]
 		internal static extern void Camera_SetOrthographic (IntPtr handle, bool enable);
 
 		/// <summary>
@@ -474,18 +462,6 @@ namespace Urho
 		{
 			Runtime.ValidateRefCounted (this);
 			return Camera_GetViewMask (handle);
-		}
-
-		[DllImport (Consts.NativeImport, CallingConvention = CallingConvention.Cdecl)]
-		internal static extern uint Camera_GetViewOverrideFlags (IntPtr handle);
-
-		/// <summary>
-		/// Return view override flags.
-		/// </summary>
-		private uint GetViewOverrideFlags ()
-		{
-			Runtime.ValidateRefCounted (this);
-			return Camera_GetViewOverrideFlags (handle);
 		}
 
 		[DllImport (Consts.NativeImport, CallingConvention = CallingConvention.Cdecl)]
@@ -1047,20 +1023,6 @@ namespace Urho
 			}
 			set {
 				SetViewMask (value);
-			}
-		}
-
-		/// <summary>
-		/// Return view override flags.
-		/// Or
-		/// Set view override flags.
-		/// </summary>
-		public ViewOverrideFlags ViewOverrideFlags {
-			get {
-				return (ViewOverrideFlags)GetViewOverrideFlags ();
-			}
-			set {
-				SetViewOverrideFlags ((uint)value);
 			}
 		}
 

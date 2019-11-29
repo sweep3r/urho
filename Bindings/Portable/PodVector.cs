@@ -3,8 +3,10 @@ using System.Runtime.InteropServices;
 
 namespace Urho {
 	public class PodVector<T> where T : UrhoObject {
+#if false
 		IntPtr handle;
-		
+#endif
+
 		public PodVector ()
 		{
 #if false

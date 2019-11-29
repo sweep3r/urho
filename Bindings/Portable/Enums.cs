@@ -97,17 +97,17 @@ namespace Urho {
 		}
 	}
 
-	internal enum CallbackType
+	public enum CallbackType
 	{
-		Component_OnSceneSet,
-		Component_SaveXml,
-		Component_LoadXml,
-		Component_AttachedToNode,
-		Component_OnNodeSetEnabled,
+		OnSceneSet,
+		SaveXml,
+		LoadXml,
+		AttachedToNode,
+		OnNodeSetEnabled,
 
-		RefCounted_AddRef,
-		RefCounted_Delete,
+		AddRef,
+		Delete,
 
-		Log_Write,
+		Write,
 	};
 }

@@ -209,7 +209,7 @@ namespace Urho
 				Current.ActionManager.CancelActiveActions();
 			LogSharp.Debug("ProxyStop");
 			UrhoPlatformInitializer.Initialized = false;
-			var context = Current.Context;
+
 			var app = GetApp(h);
 			app.IsClosed = true;
 			app.Stop();
@@ -247,7 +247,8 @@ namespace Urho
 
 #if __ANDROID__
 			current.WaitFrameEnd();
-			Org.Libsdl.App.SDLActivity.OnDestroy();
+//hwd todo
+			//Org.Libsdl.App.SDLActivity.OnDestroy();
 			return;
 #endif
 			Current.Input.Enabled = false;
@@ -339,7 +340,8 @@ namespace Urho
 		{
 			get
 			{
-#if __ANDROID__ // avoid redundant pinvoke for iOS and Android
+				// avoid redundant pinvoke for iOS and Android
+#if __ANDROID__
 				return Platforms.Android;
 #elif __IOS__
 				return Platforms.iOS;
@@ -347,11 +349,12 @@ namespace Urho
 				return Platforms.SharpReality;
 #elif WINDOWS_UWP
 				return Platforms.UWP;
-#endif
-				Runtime.Validate(typeof(Application));
+#else
+//hwd				Runtime.Validate(typeof(Application));
 				if (platform == Platforms.Unknown)
 					platform = PlatformsMap.FromString(Marshal.PtrToStringAnsi(GetPlatform()));
 				return platform;
+#endif
 			}
 		}
 

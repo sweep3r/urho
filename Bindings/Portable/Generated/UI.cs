@@ -272,6 +272,18 @@ namespace Urho.Gui
 		}
 
 		[DllImport (Consts.NativeImport, CallingConvention = CallingConvention.Cdecl)]
+		internal static extern void UI_SetMaxDoubleClickDistance (IntPtr handle, float distPixels);
+
+		/// <summary>
+		/// Set max screen distance in pixels between double click clicks.
+		/// </summary>
+		private void SetMaxDoubleClickDistance (float distPixels)
+		{
+			Runtime.ValidateRefCounted (this);
+			UI_SetMaxDoubleClickDistance (handle, distPixels);
+		}
+
+		[DllImport (Consts.NativeImport, CallingConvention = CallingConvention.Cdecl)]
 		internal static extern void UI_SetDragBeginInterval (IntPtr handle, float interval);
 
 		/// <summary>
@@ -632,6 +644,18 @@ namespace Urho.Gui
 		}
 
 		[DllImport (Consts.NativeImport, CallingConvention = CallingConvention.Cdecl)]
+		internal static extern float UI_GetMaxDoubleClickDistance (IntPtr handle);
+
+		/// <summary>
+		/// Get max screen distance in pixels for double clicks to register.
+		/// </summary>
+		private float GetMaxDoubleClickDistance ()
+		{
+			Runtime.ValidateRefCounted (this);
+			return UI_GetMaxDoubleClickDistance (handle);
+		}
+
+		[DllImport (Consts.NativeImport, CallingConvention = CallingConvention.Cdecl)]
 		internal static extern float UI_GetDragBeginInterval (IntPtr handle);
 
 		/// <summary>
@@ -824,15 +848,15 @@ namespace Urho.Gui
 		}
 
 		[DllImport (Consts.NativeImport, CallingConvention = CallingConvention.Cdecl)]
-		internal static extern void UI_SetRenderToTexture (IntPtr handle, IntPtr component, bool enable);
+		internal static extern void UI_SetElementRenderTexture (IntPtr handle, IntPtr element, IntPtr texture);
 
 		/// <summary>
-		/// Register UIElement for being rendered into a texture.
+		/// Set texture to which element will be rendered.
 		/// </summary>
-		public void SetRenderToTexture (UIComponent component, bool enable)
+		public void SetElementRenderTexture (UIElement element, Texture2D texture)
 		{
 			Runtime.ValidateRefCounted (this);
-			UI_SetRenderToTexture (handle, (object)component == null ? IntPtr.Zero : component.Handle, enable);
+			UI_SetElementRenderTexture (handle, (object)element == null ? IntPtr.Zero : element.Handle, (object)texture == null ? IntPtr.Zero : texture.Handle);
 		}
 
 		public override StringHash Type {
@@ -899,6 +923,20 @@ namespace Urho.Gui
 			}
 			set {
 				SetDoubleClickInterval (value);
+			}
+		}
+
+		/// <summary>
+		/// Get max screen distance in pixels for double clicks to register.
+		/// Or
+		/// Set max screen distance in pixels between double click clicks.
+		/// </summary>
+		public float MaxDoubleClickDistance {
+			get {
+				return GetMaxDoubleClickDistance ();
+			}
+			set {
+				SetMaxDoubleClickDistance (value);
 			}
 		}
 

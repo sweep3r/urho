@@ -151,11 +151,11 @@ namespace Urho
 				builder.Append(" -s");
 
 			string[] resourcePathes =
-#if __ANDROID__
-				new[] { "Assets/CoreData" } // CoreData on Android is embedded into the lib now
-#else
+//#if __ANDROID__
+//				new[] { "Assets/CoreData" } // CoreData on Android is embedded into the lib now
+//#else
 				new[] { "CoreData" }
-#endif
+//#endif
 					.Concat(ResourcePaths ?? new string[0]).ToArray();
 
 			if (!AutoloadCoreData)

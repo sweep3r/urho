@@ -29,10 +29,10 @@ namespace Urho.SharpReality
 			var staticModel = CursorModelNode.CreateComponent<StaticModel>();
 			staticModel.Model = CoreAssets.Models.Torus;
 			Material mat = new Material();
-			mat.SetTechnique(0, CoreAssets.Techniques.NoTextureOverlay, 1, 1);
+			mat.SetTechnique(0, CoreAssets.Techniques.NoTextureOverlay, MaterialQuality.Medium, 1);
 			mat.SetShaderParameter("MatDiffColor", Color.Cyan);
 			RunIdleAnimation();
-			staticModel.SetMaterial(mat);
+			staticModel.SetMaterial(0, mat);
 			staticModel.ViewMask = 0x80000000; //hide from raycasts
 			base.OnAttachedToNode(node);
 			ReceiveSceneUpdates = true;

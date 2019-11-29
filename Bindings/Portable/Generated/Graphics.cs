@@ -283,18 +283,6 @@ namespace Urho
 		}
 
 		[DllImport (Consts.NativeImport, CallingConvention = CallingConvention.Cdecl)]
-		internal static extern void Graphics_Clear (IntPtr handle, uint flags, ref Urho.Color color, float depth, uint stencil);
-
-		/// <summary>
-		/// Clear any or all of rendertarget, depth buffer and stencil buffer.
-		/// </summary>
-		public void Clear (uint flags, Urho.Color color = default(Urho.Color), float depth = 1f, uint stencil = 0)
-		{
-			Runtime.ValidateRefCounted (this);
-			Graphics_Clear (handle, flags, ref color, depth, stencil);
-		}
-
-		[DllImport (Consts.NativeImport, CallingConvention = CallingConvention.Cdecl)]
 		internal static extern bool Graphics_ResolveToTexture (IntPtr handle, IntPtr destination, ref Urho.IntRect viewport);
 
 		/// <summary>

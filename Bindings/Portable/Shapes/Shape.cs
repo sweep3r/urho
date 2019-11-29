@@ -38,7 +38,7 @@ namespace Urho.Shapes
 				{
 					alphaTechnique = value.A < (1 - tolerance); 
 					material = Material.FromColor(value);
-					SetMaterial(material);
+					SetMaterial(0, material);
 					color = value;
 					return;
 				}

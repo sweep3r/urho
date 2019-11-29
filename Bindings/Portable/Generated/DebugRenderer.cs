@@ -264,7 +264,7 @@ namespace Urho
 		/// <summary>
 		/// Add a sphere.
 		/// </summary>
-		public void AddSphere (SphereShape sphere, Urho.Color color, bool depthTest = true)
+		public void AddSphere (Sphere sphere, Urho.Color color, bool depthTest = true)
 		{
 			Runtime.ValidateRefCounted (this);
 			DebugRenderer_AddSphere (handle, (object)sphere == null ? IntPtr.Zero : sphere.Handle, ref color, depthTest);
@@ -274,9 +274,9 @@ namespace Urho
 		internal static extern void DebugRenderer_AddSphereSector (IntPtr handle, IntPtr sphere, ref Urho.Quaternion rotation, float angle, bool drawLines, ref Urho.Color color, bool depthTest);
 
 		/// <summary>
-		/// Add a sphere sector.
+		/// Add a sphere sector. Angle ranges from 0 to 360. Identity Quaternion yields the filled portion of the sector upwards.
 		/// </summary>
-		public void AddSphereSector (SphereShape sphere, Urho.Quaternion rotation, float angle, bool drawLines, Urho.Color color, bool depthTest = true)
+		public void AddSphereSector (Sphere sphere, Urho.Quaternion rotation, float angle, bool drawLines, Urho.Color color, bool depthTest = true)
 		{
 			Runtime.ValidateRefCounted (this);
 			DebugRenderer_AddSphereSector (handle, (object)sphere == null ? IntPtr.Zero : sphere.Handle, ref rotation, angle, drawLines, ref color, depthTest);

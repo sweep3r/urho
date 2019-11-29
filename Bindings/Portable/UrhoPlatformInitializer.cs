@@ -14,7 +14,6 @@ namespace Urho
 		{
 			if (Initialized)
 				return;
-
 #if NET45
 			Desktop.DesktopUrhoInitializer.OnInited();
 #elif __IOS__
@@ -28,7 +27,7 @@ namespace Urho
 #elif NETCOREAPP2_1
 			NetCore.NetCoreUrhoInitializer.OnInited();
 #else
-			throw new Exception("Implementation assembly (iOS, Android or Desktop) is not referenced");
+			//throw new Exception("Implementation assembly (iOS, Android or Desktop) is not referenced");
 #endif
 			Initialized = true;
 		}

@@ -115,39 +115,39 @@ namespace Urho.Gui
 		}
 
 		[DllImport (Consts.NativeImport, CallingConvention = CallingConvention.Cdecl)]
-		internal static extern bool UIElement_LoadXML (IntPtr handle, IntPtr source, bool setInstanceDefault);
+		internal static extern bool UIElement_LoadXML (IntPtr handle, IntPtr source);
 
 		/// <summary>
 		/// Load from XML data. Return true if successful.
 		/// </summary>
-		public override bool LoadXml (XmlElement source, bool setInstanceDefault = false)
+		public override bool LoadXml (XmlElement source)
 		{
 			Runtime.ValidateRefCounted (this);
-			return UIElement_LoadXML (handle, (object)source == null ? IntPtr.Zero : source.Handle, setInstanceDefault);
+			return UIElement_LoadXML (handle, (object)source == null ? IntPtr.Zero : source.Handle);
 		}
 
 		[DllImport (Consts.NativeImport, CallingConvention = CallingConvention.Cdecl)]
-		internal static extern bool UIElement_LoadXML0 (IntPtr handle, IntPtr source, IntPtr styleFile, bool setInstanceDefault);
+		internal static extern bool UIElement_LoadXML0 (IntPtr handle, IntPtr source, IntPtr styleFile);
 
 		/// <summary>
 		/// Load from XML data with style. Return true if successful.
 		/// </summary>
-		public virtual bool LoadXml (XmlElement source, Urho.Resources.XmlFile styleFile, bool setInstanceDefault = false)
+		public virtual bool LoadXml (XmlElement source, Urho.Resources.XmlFile styleFile)
 		{
 			Runtime.ValidateRefCounted (this);
-			return UIElement_LoadXML0 (handle, (object)source == null ? IntPtr.Zero : source.Handle, (object)styleFile == null ? IntPtr.Zero : styleFile.Handle, setInstanceDefault);
+			return UIElement_LoadXML0 (handle, (object)source == null ? IntPtr.Zero : source.Handle, (object)styleFile == null ? IntPtr.Zero : styleFile.Handle);
 		}
 
 		[DllImport (Consts.NativeImport, CallingConvention = CallingConvention.Cdecl)]
-		internal static extern IntPtr UIElement_LoadChildXML (IntPtr handle, IntPtr childElem, IntPtr styleFile, bool setInstanceDefault);
+		internal static extern IntPtr UIElement_LoadChildXML (IntPtr handle, IntPtr childElem, IntPtr styleFile);
 
 		/// <summary>
 		/// Create a child by loading from XML data with style. Returns the child element if successful, null if otherwise.
 		/// </summary>
-		public UIElement LoadChildXml (XmlElement childElem, Urho.Resources.XmlFile styleFile = null, bool setInstanceDefault = false)
+		public UIElement LoadChildXml (XmlElement childElem, Urho.Resources.XmlFile styleFile)
 		{
 			Runtime.ValidateRefCounted (this);
-			return Runtime.LookupObject<UIElement> (UIElement_LoadChildXML (handle, (object)childElem == null ? IntPtr.Zero : childElem.Handle, (object)styleFile == null ? IntPtr.Zero : styleFile.Handle, setInstanceDefault));
+			return Runtime.LookupObject<UIElement> (UIElement_LoadChildXML (handle, (object)childElem == null ? IntPtr.Zero : childElem.Handle, (object)styleFile == null ? IntPtr.Zero : styleFile.Handle));
 		}
 
 		[DllImport (Consts.NativeImport, CallingConvention = CallingConvention.Cdecl)]
@@ -244,30 +244,6 @@ namespace Urho.Gui
 		{
 			Runtime.ValidateRefCounted (this);
 			UIElement_OnDoubleClick (handle, ref position, ref screenPosition, button, buttons, qualifiers, (object)cursor == null ? IntPtr.Zero : cursor.Handle);
-		}
-
-		[DllImport (Consts.NativeImport, CallingConvention = CallingConvention.Cdecl)]
-		internal static extern void UIElement_OnWheel (IntPtr handle, int delta, int buttons, int qualifiers);
-
-		/// <summary>
-		/// React to mouse wheel.
-		/// </summary>
-		public virtual void OnWheel (int delta, int buttons, int qualifiers)
-		{
-			Runtime.ValidateRefCounted (this);
-			UIElement_OnWheel (handle, delta, buttons, qualifiers);
-		}
-
-		[DllImport (Consts.NativeImport, CallingConvention = CallingConvention.Cdecl)]
-		internal static extern void UIElement_OnKey (IntPtr handle, int key, int buttons, int qualifiers);
-
-		/// <summary>
-		/// React to a key press.
-		/// </summary>
-		public virtual void OnKey (int key, int buttons, int qualifiers)
-		{
-			Runtime.ValidateRefCounted (this);
-			UIElement_OnKey (handle, key, buttons, qualifiers);
 		}
 
 		[DllImport (Consts.NativeImport, CallingConvention = CallingConvention.Cdecl)]
@@ -1033,22 +1009,10 @@ namespace Urho.Gui
 		}
 
 		[DllImport (Consts.NativeImport, CallingConvention = CallingConvention.Cdecl)]
-		internal static extern void UIElement_SetDragDropMode (IntPtr handle, uint mode);
-
-		/// <summary>
-		/// Set drag and drop flags.
-		/// </summary>
-		private void SetDragDropMode (uint mode)
-		{
-			Runtime.ValidateRefCounted (this);
-			UIElement_SetDragDropMode (handle, mode);
-		}
-
-		[DllImport (Consts.NativeImport, CallingConvention = CallingConvention.Cdecl)]
 		internal static extern bool UIElement_SetStyle (IntPtr handle, string styleName, IntPtr file);
 
 		/// <summary>
-		/// Set style from an XML file. Find the style element by name. If the style file is not explicitly provided, use the default style from parental chain. Return true if the style is applied successfully.
+		/// Set style from an XML file. Find the style element by name. If the style file is not explicitly provided, use the default style from parental chain. Return true if the style is applied successfully. See also
 		/// </summary>
 		public bool SetStyle (string styleName, Urho.Resources.XmlFile file = null)
 		{
@@ -1072,7 +1036,7 @@ namespace Urho.Gui
 		internal static extern bool UIElement_SetStyleAuto (IntPtr handle, IntPtr file);
 
 		/// <summary>
-		/// Set style from an XML file. Find the style element automatically by using the element's typename. If the style file is not explicitly provided, use the default style from parental chain. Return true if the style is applied successfully.
+		/// Set style from an XML file. Find the style element automatically by using the element's typename. If the style file is not explicitly provided, use the default style from parental chain. Return true if the style is applied successfully. See also
 		/// </summary>
 		public bool SetStyleAuto (Urho.Resources.XmlFile file = null)
 		{
@@ -2097,18 +2061,6 @@ namespace Urho.Gui
 		}
 
 		[DllImport (Consts.NativeImport, CallingConvention = CallingConvention.Cdecl)]
-		internal static extern uint UIElement_GetDragDropMode (IntPtr handle);
-
-		/// <summary>
-		/// Return drag and drop flags.
-		/// </summary>
-		private uint GetDragDropMode ()
-		{
-			Runtime.ValidateRefCounted (this);
-			return UIElement_GetDragDropMode (handle);
-		}
-
-		[DllImport (Consts.NativeImport, CallingConvention = CallingConvention.Cdecl)]
 		internal static extern IntPtr UIElement_GetAppliedStyle (IntPtr handle);
 
 		/// <summary>
@@ -2480,6 +2432,18 @@ namespace Urho.Gui
 		{
 			Runtime.ValidateRefCounted (this);
 			return UIElement_GetEffectiveMinSize (handle);
+		}
+
+		[DllImport (Consts.NativeImport, CallingConvention = CallingConvention.Cdecl)]
+		internal static extern void UIElement_SetRenderTexture (IntPtr handle, IntPtr texture);
+
+		/// <summary>
+		/// Set texture to which element will be rendered.
+		/// </summary>
+		public void SetRenderTexture (Texture2D texture)
+		{
+			Runtime.ValidateRefCounted (this);
+			UIElement_SetRenderTexture (handle, (object)texture == null ? IntPtr.Zero : texture.Handle);
 		}
 
 		public override StringHash Type {
@@ -3001,20 +2965,6 @@ namespace Urho.Gui
 			}
 			set {
 				SetFocusMode (value);
-			}
-		}
-
-		/// <summary>
-		/// Return drag and drop flags.
-		/// Or
-		/// Set drag and drop flags.
-		/// </summary>
-		public uint DragDropMode {
-			get {
-				return GetDragDropMode ();
-			}
-			set {
-				SetDragDropMode (value);
 			}
 		}
 

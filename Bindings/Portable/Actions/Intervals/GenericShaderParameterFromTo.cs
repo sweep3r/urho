@@ -40,7 +40,7 @@ namespace Urho.Actions
 		public ShaderParameterFloatFromTo(string parameter, float fromValue, float toValue, float duration, Material material = null)
 			: base(parameter, fromValue, toValue, ValueAction, duration, material) {}
 
-		static void ValueAction(string parameter, float from, float to, float duration, Material material) => 
+		new static void ValueAction(string parameter, float from, float to, float duration, Material material) => 
 			material.SetShaderParameter(parameter, from + (to - from) * duration);
 	}
 
@@ -49,7 +49,7 @@ namespace Urho.Actions
 		public ShaderParameterVector2FromTo(string parameter, Vector2 fromValue, Vector2 toValue, float duration, Material material = null)
 			: base(parameter, fromValue, toValue, ValueAction, duration, material) { }
 
-		static void ValueAction(string parameter, Vector2 from, Vector2 to, float duration, Material material) =>
+		new static void ValueAction(string parameter, Vector2 from, Vector2 to, float duration, Material material) =>
 			material.SetShaderParameter(parameter, from + (to - from) * duration);
 	}
 
@@ -58,7 +58,7 @@ namespace Urho.Actions
 		public ShaderParameterVector3FromTo(string parameter, Vector3 fromValue, Vector3 toValue, float duration, Material material = null)
 			: base(parameter, fromValue, toValue, ValueAction, duration, material) { }
 
-		static void ValueAction(string parameter, Vector3 from, Vector3 to, float duration, Material material) =>
+		new static void ValueAction(string parameter, Vector3 from, Vector3 to, float duration, Material material) =>
 			material.SetShaderParameter(parameter, from + (to - from) * duration);
 	}
 
@@ -67,7 +67,7 @@ namespace Urho.Actions
 		public ShaderParameterVector4FromTo(string parameter, Vector4 fromValue, Vector4 toValue, float duration, Material material = null)
 			: base(parameter, fromValue, toValue, ValueAction, duration, material) { }
 
-		static void ValueAction(string parameter, Vector4 from, Vector4 to, float duration, Material material) =>
+		new static void ValueAction(string parameter, Vector4 from, Vector4 to, float duration, Material material) =>
 			material.SetShaderParameter(parameter, from + (to - from) * duration);
 	}
 
@@ -76,7 +76,7 @@ namespace Urho.Actions
 		public ShaderParameterColorFromTo(string parameter, Color fromValue, Color toValue, float duration, Material material = null)
 			: base(parameter, fromValue, toValue, ValueAction, duration, material) { }
 
-		static void ValueAction(string parameter, Color from, Color to, float duration, Material material) =>
+		new static void ValueAction(string parameter, Color from, Color to, float duration, Material material) =>
 			material.SetShaderParameter(parameter, from + (to - from) * duration);
 	}
 

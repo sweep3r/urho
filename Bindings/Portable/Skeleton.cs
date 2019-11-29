@@ -30,19 +30,19 @@ namespace Urho {
 			}
 		}
 
-		public BoneWrapper GetBoneSafe(StringHash nameHash)
-		{
-			Runtime.ValidateObject(this);
-			unsafe
-			{
-				Bone* result = Skeleton_GetBone0(handle, nameHash.Code);
-				if (result == null)
-					return null;
-				return new BoneWrapper(this, result);
-			}
-		}
+		//public BoneWrapper GetBoneSafe(StringHash nameHash)
+		//{
+		//	Runtime.ValidateObject(this);
+		//	unsafe
+		//	{
+		//		Bone* result = Skeleton_GetBone0(handle, nameHash.Code);
+		//		if (result == null)
+		//			return null;
+		//		return new BoneWrapper(this, result);
+		//	}
+		//}
 
-		public BoneWrapper GetBoneSafe(string name) => GetBoneSafe(new StringHash(name));
+		//public BoneWrapper GetBoneSafe(string name) => GetBoneSafe(new StringHash(name));
 	}
 
 	public partial class AnimatedModel {

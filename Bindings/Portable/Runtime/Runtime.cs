@@ -56,19 +56,19 @@ namespace Urho
 			const string typeNameKey = "SharpTypeName";
 
 			// while app is not started - accept only Log callbacks
-			if (!isStarted && type != CallbackType.Log_Write)
+			if (!isStarted && type != CallbackType.Write)
 				return;
 
 			switch (type)
 			{
 				//Component:
-				case CallbackType.Component_OnSceneSet:
+				case CallbackType.OnSceneSet:
 					{
 						var component = LookupObject<Component>(target, false);
 						component?.OnSceneSet(LookupObject<Scene>(param1, false));
 					}
 					break;
-				case CallbackType.Component_SaveXml:
+				case CallbackType.SaveXml:
 					{
 						var component = LookupObject<Component>(target, false);
 						if (component != null && component.TypeName != component.GetType().Name)
@@ -79,7 +79,7 @@ namespace Urho
 						}
 					}
 					break;
-				case CallbackType.Component_LoadXml:
+				case CallbackType.LoadXml:
 					{
 						var xmlElement = new XmlElement(param1);
 						var name = xmlElement.GetAttribute(typeNameKey);
@@ -108,13 +108,13 @@ namespace Urho
 						}
 					}
 					break;
-				case CallbackType.Component_AttachedToNode:
+				case CallbackType.AttachedToNode:
 					{
 						var component = LookupObject<Component>(target, false);
 						component?.AttachedToNode(component.Node);
 					}
 					break;
-				case CallbackType.Component_OnNodeSetEnabled:
+				case CallbackType.OnNodeSetEnabled:
 					{
 						var component = LookupObject<Component>(target, false);
 						component?.OnNodeSetEnabled();
@@ -124,7 +124,7 @@ namespace Urho
 
 				//RefCounted:
 
-				case CallbackType.RefCounted_AddRef:
+				case CallbackType.AddRef:
 					{
 						//if we have an object with this handle and it's reference is weak - then change it to strong.
 						var referenceHolder = RefCountedCache.Get(target);
@@ -132,7 +132,7 @@ namespace Urho
 					}
 					break;
 
-				case CallbackType.RefCounted_Delete:
+				case CallbackType.Delete:
 					{
 						var referenceHolder = RefCountedCache.Get(target);
 						if (referenceHolder == null)
@@ -150,7 +150,7 @@ namespace Urho
 					}
 					break;
 
-				case CallbackType.Log_Write:
+				case CallbackType.Write:
 					Urho.Application.ThrowUnhandledException(
 						new Exception(param3 + ". You can omit this exception by subscribing to Urho.Application.UnhandledException event and set Handled property to True.\nApplicationOptions: " + Application.CurrentOptions));
 					break;

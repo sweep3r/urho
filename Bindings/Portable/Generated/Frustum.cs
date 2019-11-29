@@ -151,7 +151,7 @@ namespace Urho
 		/// <summary>
 		/// Test if a sphere is inside, outside or intersects.
 		/// </summary>
-		public Intersection IsInside (SphereShape sphere)
+		public Intersection IsInside (Sphere sphere)
 		{
 			Runtime.ValidateObject (this);
 			return Frustum_IsInside4 (handle, (object)sphere == null ? IntPtr.Zero : sphere.Handle);
@@ -163,7 +163,7 @@ namespace Urho
 		/// <summary>
 		/// Test if a sphere if (partially) inside or outside.
 		/// </summary>
-		public Intersection IsInsideFast (SphereShape sphere)
+		public Intersection IsInsideFast (Sphere sphere)
 		{
 			Runtime.ValidateObject (this);
 			return Frustum_IsInsideFast (handle, (object)sphere == null ? IntPtr.Zero : sphere.Handle);
@@ -218,15 +218,15 @@ namespace Urho
 		}
 
 		[DllImport (Consts.NativeImport, CallingConvention = CallingConvention.Cdecl)]
-		internal static extern Rect Frustum_Projected (IntPtr handle, ref Urho.Matrix4 transform);
+		internal static extern Rect Frustum_Projected (IntPtr handle, ref Urho.Matrix4 projection);
 
 		/// <summary>
 		/// Return projected by a 4x4 projection matrix.
 		/// </summary>
-		public Rect Projected (Urho.Matrix4 transform)
+		public Rect Projected (Urho.Matrix4 projection)
 		{
 			Runtime.ValidateObject (this);
-			return Frustum_Projected (handle, ref transform);
+			return Frustum_Projected (handle, ref projection);
 		}
 
 		[DllImport (Consts.NativeImport, CallingConvention = CallingConvention.Cdecl)]

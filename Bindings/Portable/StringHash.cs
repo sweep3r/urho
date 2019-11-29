@@ -42,6 +42,16 @@ namespace Urho {
 		{
 			return !(hash1 == hash2);
 		}
+
+		public override bool Equals(object obj)
+		{
+			return this.Code.Equals(((StringHash)obj).Code);
+		}
+
+		public override int GetHashCode()
+		{
+			return Code;
+		}
 	}
 
 	// Points to a StringHash
