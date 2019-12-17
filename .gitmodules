@@ -1,3 +1,7 @@
 [submodule "Samples"]
 	path = Samples
 	url = https://github.com/sweep3r/urho-samples.git
+[submodule "Urho3D/Source"]
+	path = Urho3D/Source
+	url = https://github.com/sweep3r/Urho3D.git
+	branch = hd/try2
